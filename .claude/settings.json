@@ -6,6 +6,7 @@
       "PowerShell",
       "NotebookEdit",
       "WebFetch",
+      "mcp__*",
       "WebSearch",
       "Edit(/agents/**)",
       "Edit(/skills/**)",
@@ -26,7 +27,8 @@
     ],
     "ask": [
       "Write",
-      "Edit"
+      "Edit",
+      "Agent"
     ],
     "blockReadsOutsideWorkingDirectories": true,
     "blockWritesOutsideWorkingDirectories": true

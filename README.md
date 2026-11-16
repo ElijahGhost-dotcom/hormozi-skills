@@ -30,7 +30,7 @@ Building a compelling offer is hard. Most founders, coaches, and consultants eit
 This fork retains the **17 marketing skills** and the orchestrator with five subagents. The unrelated `create-plugin` scaffolding skill was removed. The orchestrator no longer declares terminal access.
 
 - **Default: project-only**. Use a dedicated, non-sensitive directory and install only the skills you need.
-- **No global install** and no automatic shell or installation commands.
+- **No global install** and no automatic shell or installation commands. Claude Code's project config also denies every MCP tool and asks before subagent delegation.
 - **Claude Code**: the checked-in `.claude/settings.json` applies **when this repository is the project being opened**. If you install the skills as a plugin in another project, its security rules **do not follow the plugin**; configure that project's permissions separately.
 - **Codex**: the checked-in `.codex/config.toml` uses a read-only sandbox and approvals when this repository is the active trusted project; it does **not** automatically configure Codex in other projects.
 - **Output**: Markdown in `output/` only, after explicit approval. Never overwrite an existing output without permission.
