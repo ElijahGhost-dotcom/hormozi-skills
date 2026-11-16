@@ -9,7 +9,7 @@
 
 ---
 
-> A skill library for coding agents. Plug it in, describe your business, and get a complete offer system — market research, offer structure, pricing, pitch, hooks, landing page — written to files in one session.
+> A skill library for coding agents. Plug it in, describe your business, and get a complete offer system — market research, offer structure, pricing, pitch, hooks and landing page — proposed for review, then written only with approval.
 
 ---
 
@@ -25,52 +25,49 @@ Building a compelling offer is hard. Most founders, coaches, and consultants eit
 
 ---
 
+## Security-hardened fork
+
+This fork retains the **17 marketing skills** and the orchestrator with five subagents. The unrelated `create-plugin` scaffolding skill was removed. The orchestrator no longer declares terminal access.
+
+- **Default: project-only**. Use a dedicated, non-sensitive directory and install only the skills you need.
+- **No global install** and no automatic shell or installation commands.
+- **Claude Code**: the checked-in `.claude/settings.json` applies **when this repository is the project being opened**. If you install the skills as a plugin in another project, its security rules **do not follow the plugin**; configure that project's permissions separately.
+- **Codex**: the checked-in `.codex/config.toml` uses a read-only sandbox and approvals when this repository is the active trusted project; it does **not** automatically configure Codex in other projects.
+- **Output**: Markdown in `output/` only, after explicit approval. Never overwrite an existing output without permission.
+- **No client secrets**: provide only synthetic or redacted marketing input. Never assume the model has verified external research.
+
+See [SECURITY.md](SECURITY.md) for the threat model, exact enforced versus advisory boundaries and deployment checklist. See [UPSTREAM_PIN.md](UPSTREAM_PIN.md) for the reviewed source commit and manual update policy.
+
 ## Quick Start
 
-### Claude Code
+### Claude Code: use this fork, not upstream
 
-Add the marketplace, then install the plugin:
+In Claude Code's plugin command interface (these are plugin commands, **not shell commands**):
 
-```bash
-/plugin marketplace add alexsmedile/hormozi-skills
+```text
+/plugin marketplace add ElijahGhost-dotcom/hormozi-skills
 /plugin install hormozi-skills@hormozi-skills
 ```
 
-Then invoke the `hormozi-orchestrator` agent or a specific skill.
+**Important:** configure the *host project's* permissions first; the plugin installer does not copy this fork's project security settings into that host project. For the strongest default, open this fork itself as the isolated workspace and explicitly review any requested file writes.
 
 ### Codex
 
-Install directly from GitHub:
+Use a dedicated project in **read-only** mode with approval required for file changes; the included project config is an example for operating from this repository. If using the plugin from another directory, configure that directory independently. Review proposed generated files before saving them.
 
-```bash
-codex plugin install https://github.com/alexsmedile/hormozi-skills
-```
+### Manual project-scoped use
 
-### Manual Install
-
-If you want the raw skill files instead of the plugin flow:
-
-```bash
-# Clone the skill library
-git clone https://github.com/alexsmedile/hormozi-skills
-cd hormozi-skills
-
-# Copy skills and agents into your Claude config
-cp -r skills/ agents/ ~/.claude/
-```
-
-> [!TIP]
-> Describe your business in plain language — rough idea, brain dump, or existing offer. The orchestrator interviews you, detects your stage, and builds everything from there.
+Copy only the needed `skills/<name>/` folders to the target project's `.claude/skills/` using your file manager. If needed, copy only the declared agent Markdown files to that project's `.claude/agents/`. Do not install globally. Copy the security settings **only after checking they do not override project requirements**, and check `/permissions` before use.
 
 ---
 
 ## 📦 What You Get
 
-11 output files written to `output/` in one session:
+Up to 11 output files proposed for `output/` in one session (each write requires approval):
 
 | File | What's Inside |
 |------|--------------|
-| `MARKET_RESEARCH.md` | Validated niche, pain map, demand signals |
+| `MARKET_RESEARCH.md` | Hypothesized niche, pain map, validation plan (verify externally) |
 | `OFFER.md` | Full Grand Slam Offer — avatar, obstacles, solution map, value stack |
 | `OFFER_ANGLES.md` | 8 positioning angles, ranked |
 | `OFFER_AUDIT.md` | Score per dimension + priority fixes |

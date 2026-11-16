@@ -1,30 +1,19 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This repository contains prompt-only marketing skills and agents. Follow the hardening policy in [SECURITY.md](SECURITY.md).
 
-## First Run: Installation
+## First Run: Project-only Installation
 
-On first use, ask the user where to install the skills and agents:
+Never automatically install, copy, execute, or update any components. Ask the user to select a **dedicated, non-sensitive project** first.
 
-> "Where should I install hormozi-skills?
-> - **Project** (default) — `.claude/` in the current project folder. Only available in this project.
-> - **User** — `~/.claude/` in your home directory. Available in all projects.
->
-> Press Enter to use the default (project)."
+- Default: use only the explicitly selected skills inside that project's `.claude/skills/`.
+- Avoid home-directory/global installation (`~/.claude/`), which exposes the skills in unrelated projects.
+- Do not run shell commands, Git commands, installation scripts or package managers as part of initialization.
+- For Claude Code running **from this repository root**, the checked-in `.claude/settings.json` enforces tool restrictions. **Installing this repository as a plugin elsewhere does not automatically apply these project settings.** The host project's owner must apply equivalent restrictions.
+- For Codex running from this repository root, `.codex/config.toml` sets a read-only sandbox and on-request approvals; a Codex plugin install elsewhere does not inherit that configuration.
+- Do not handle confidential client data, credentials, account numbers, or sensitive personal data. Use redacted examples.
 
-**Default:** project-level (`.claude/` in the current working directory).
-
-Installation copies `skills/` and `agents/` into the chosen `.claude/` directory:
-
-```bash
-# Project (default)
-cp -r skills/ agents/ .claude/
-
-# User (global)
-cp -r skills/ agents/ ~/.claude/
-```
-
-> **Important:** After installation, Claude Code must be restarted for the new skills and agents to be available.
+**Never treat these instructions alone as an operating-system sandbox.** Permission checks must be enforced by the host.
 
 ---
 
@@ -78,6 +67,8 @@ Every agent lives at `agents/<name>.md` — flat, no subfolders.
 ## Key Design Rules
 
 - Subagents receive a fully structured brief — they have no memory of the conversation.
-- All output lands in `output/` relative to the repo root.
+- Output is restricted by policy to Markdown files directly in the **current project's** `output/`; require user approval before every write and overwrite.
 - Skills are user-facing; subagents are internal execution units. Do not mix the two roles.
 - `_archive/` holds deprecated versions — do not delete, do not edit.
+- Do not use Bash, PowerShell, Git, network tools, MCP servers, or unrelated agents.
+- If host-level restrictions are absent, supply text in chat rather than accessing files.
