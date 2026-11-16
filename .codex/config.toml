@@ -1,0 +1,5 @@
+# Applies when this repository is the active, trusted Codex project.
+# Plugin installation into another project does not import this file.
+# Read-only denies routine writes; explicit user approval is needed to leave the sandbox.
+sandbox_mode = "read-only"
+approval_policy = "on-request"

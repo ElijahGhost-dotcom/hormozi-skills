@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "deny": [
+      "Bash",
+      "PowerShell",
+      "NotebookEdit",
+      "WebFetch",
+      "mcp__*",
+      "WebSearch",
+      "Edit(/agents/**)",
+      "Edit(/skills/**)",
+      "Edit(/input/**)",
+      "Edit(/.claude/**)",
+      "Edit(/.codex/**)",
+      "Edit(/.github/**)",
+      "Edit(/README.md)",
+      "Edit(/CLAUDE.md)",
+      "Edit(/SECURITY.md)",
+      "Edit(/UPSTREAM_PIN.md)",
+      "Read(.env)",
+      "Read(.env.*)",
+      "Read(secrets/**)",
+      "Read(**/.ssh/**)",
+      "Read(**/*credentials*)",
+      "Read(**/*secret*)"
+    ],
+    "ask": [
+      "Write",
+      "Edit",
+      "Agent"
+    ],
+    "blockReadsOutsideWorkingDirectories": true,
+    "blockWritesOutsideWorkingDirectories": true
+  }
+}
